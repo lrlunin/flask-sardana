@@ -1,3 +1,20 @@
+<script>
+    function fetchTimings(){
+        let url = "data"
+        fetch(url)
+        .then(res => res.json())
+        .then(out => setTimings(out))
+        .catch(err => console.log("Cannot reach the server..."))
+    }
+    function setTimings(json_object){
+        for (var key in json_object){
+            document.getElementById(key).textContent = json_object[key]
+        }
+    }
+    var intervalId = window.setInterval(function(){
+        fetchTimings()
+    }, 1000)
+</script>
 <style>
     body {
         background-image: url('static/SIMPSONS_TEMPLATE.png');
@@ -19,7 +36,7 @@
 </style>
 
 <body>
-    <div style="position: absolute; left: 6.8%;">{{D}}</div>
-    <div style="position: absolute; left: 31.2%;">{{H}}</div>
-    <div style="position: absolute; left: 59.2%;">{{M}}</div>
+    <div id="D" style="position: absolute; left: 6.8%;">{{D}}</div>
+    <div id="H" style="position: absolute; left: 31.2%;">{{H}}</div>
+    <div id="M" style="position: absolute; left: 59.2%;">{{M}}</div>
 </body>
